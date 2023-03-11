@@ -74,12 +74,4 @@ You should use status \`307\` instead of \`301\`.
   return res.json(actionsCollector)
 })
 
-adminApiRouter.get('/reporting', async (req, res) => {
-  res.json({
-    creations: await shortcodeCreations.filter(),
-    shortcodes: await shortcodes.filter(),
-    invocations: await shortcodeInvocations.filter()
-  })
-})
-
 module.exports = adminApiRouter

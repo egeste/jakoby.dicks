@@ -2,6 +2,7 @@
 <html>
   <head>
     <%-include('../_head.html.ejs', { appVars })%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/ui-darkness/jquery-ui.min.css" integrity="sha512-p1d6H09ljWDOV2QwnG9MqYe2VKz/EOw0DJ6PRsl5SvIWY0Pxt0bnwl3+57OrQDMWQyyJ+XnsEq4Hlhl+GdoVKQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body class="py-5">
     <div class="container">
@@ -13,13 +14,15 @@
           <canvas id="invocations_by_country"></canvas>
         </div>
       </div>
+      <div class="row">
+        <div id="pivot_data"></div>
+      </div>
     </div>
   </body>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.umd.js" integrity="sha512-vCUbejtS+HcWYtDHRF2T5B0BKwVG/CLeuew5uT2AiX4SJ2Wff52+kfgONvtdATqkqQMC9Ye5K+Td0OTaz+P7cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript">
-    const invocationsByShortcodeChart = new Chart(document.getElementById('invocations_by_shortcode'), {
+    var invocationsByShortcodeChart = new Chart(document.getElementById('invocations_by_shortcode'), {
       type: 'bar',
       data: {
         labels: <%- JSON.stringify(invocationsByShortcodeLabels) %>,
@@ -27,7 +30,7 @@
       }
     });
 
-    const invocationsByCountryChart = new Chart(document.getElementById('invocations_by_country'), {
+    var invocationsByCountryChart = new Chart(document.getElementById('invocations_by_country'), {
       type: 'bar',
       data: {
         labels: <%- JSON.stringify(invocationsByCountryLabels) %>,
@@ -42,4 +45,18 @@
       });
     });
   </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/pivot.min.js" integrity="sha512-XgJh9jgd6gAHu9PcRBBAp0Hda8Tg87zi09Q2639t0tQpFFQhGpeCgaiEFji36Ozijjx9agZxB0w53edOFGCQ0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript">
+    $('#pivot_data').pivotUI([
+      {color: 'blue', shape: 'circle'},
+      {color: 'red', shape: 'triangle'}
+    ], {
+      rows: ['color'],
+      cols: ['shape']
+    });
+  </script>
+
 </html>
